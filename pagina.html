@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de Bug</title>
+<style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background: #f4f6f8;
+
+      padding: 20px;
+
+    }
+
+    .container {
+
+      max-width: 600px;
+
+      background: #fff;
+
+      padding: 20px;
+
+      border-radius: 8px;
+
+      margin: auto;
+
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    }
+
+    h2 {
+
+      text-align: center;
+
+    }
+
+    label {
+
+      display: block;
+
+      margin-top: 15px;
+
+      font-weight: bold;
+
+    }
+
+    input, select, textarea {
+
+      width: 100%;
+
+      padding: 8px;
+
+      margin-top: 5px;
+
+      border-radius: 5px;
+
+      border: 1px solid #ccc;
+
+    }
+
+    button {
+
+      margin-top: 20px;
+
+      width: 100%;
+
+      padding: 10px;
+
+      background: #007BFF;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+    }
+
+    button:hover {
+
+      background: #0056b3;
+
+    }
+</style>
+</head>
+<body>
+ 
+<div class="container">
+<h2>Reporte de Bug</h2>
+ 
+  <form id="bugForm">
+ 
+    <!-- Datos -->
+<label>Nombre</label>
+<input type="text" name="nombre" required>
+ 
+    <label>Tipo de usuario</label>
+<select name="tipo_usuario" required>
+<option value="">Seleccione</option>
+<option>Cliente externo</option>
+<option>Tester QA</option>
+<option>Usuario interno</option>
+</select>
+ 
+    <!-- Bug -->
+<label>Título</label>
+<input type="text" name="titulo" required>
+ 
+    <label>Descripción</label>
+<textarea name="descripcion" rows="4" required></textarea>
+ 
+    <label>Tipo de bug</label>
+<select name="tipo_bug" required>
+<option value="">Seleccione</option>
+<option>Frontend</option>
+<option>Backend</option>
+<option>Base de datos</option>
+<option>Integración externa</option>
+</select>
+ 
+    <!-- Clasificación -->
+<label>Severidad</label>
+<select name="severidad" required>
+<option value="">Seleccione</option>
+<option>Crítico</option>
+<option>Alto</option>
+<option>Medio</option>
+<option>Bajo</option>
+</select>
+ 
+    <label>Entorno</label>
+<select name="entorno" required>
+<option value="">Seleccione</option>
+<option>Producción</option>
+<option>Staging</option>
+<option>Desarrollo</option>
+</select>
+ 
+    <!-- Evidencia -->
+<label>Adjuntar evidencia</label>
+<input type="file" name="evidencia">
+ 
+    <button type="submit">Enviar</button>
+</form>
+</div>
+ 
+<script>
+
+document.getElementById("bugForm").addEventListener("submit", async function(e) {
+
+  e.preventDefault();
+ 
+  const form = document.getElementById("bugForm");
+
+  const formData = new FormData(form);
+ 
+  const webhookURL = "https://hook.eu1.make.com/kyybeedwvi6yc31bg5qmfd6o3fkn3838";
+ 
+  try {
+
+    const response = await fetch(webhookURL, {
+
+      method: "POST",
+
+      body: formData
+
+    });
+ 
+    if (response.ok) {
+
+      alert("Bug enviado correctamente");
+
+      form.reset();
+
+    } else {
+
+      alert("Error al enviar");
+
+    }
+ 
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Error de conexión");
+
+  }
+
+});
+</script>
+ 
+</body>
+</html>
+ 
